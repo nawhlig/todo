@@ -1,0 +1,33 @@
+{% load static %}
+<html>    
+<head>
+    <meta charset = "utf-8">
+    <link  rel="stylesheet"  href = "{% static 'second/css/form_css_style.css' %}">
+    {% block title %}
+    {% endblock %}
+</head>
+<body>
+    <div id="manubar">
+        <h1>Dogo&Favourite</h1>
+        <ul> <!-- http://localhost:8000/second/todo/2 -->
+            <li class="manubar_button">
+                <img src="{% static 'second/images/icon_home.png'%}"/>
+                <a href="{% url 'second:index' %}">HOME</a>
+            </li>
+            <li class="manubar_button">
+                <img src="{% static 'second/images/icon_favorite.png'%}"/>
+                <a href="{% url 'second:favourite' %}">Favorite</a>
+            </li>
+            <li class="manubar_button">
+                <img src="{% static 'second/images/icon_todo.png'%}"/>
+                <a href="{% url 'second:todo' %}">Todo</a>
+            </li>
+        </ul>
+    </div>
+
+    <div id="contents">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>

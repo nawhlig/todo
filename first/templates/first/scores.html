@@ -1,0 +1,47 @@
+{% extends 'first/layout.html' %}
+ {% block title %}
+ <title>점수</title>
+ {% endblock %}
+ {% block content %}
+ <table>
+ <thead>
+    <tr>
+        <td>이름</td><td>수학</td><td>과학</td><td>영어</td>
+    </tr>
+</thead>
+{% for score in scores %} <!-- for문 아래 있는 내용이 반복되며 출력됨-->
+    <tr>
+        <td>{{ score.name }}</td>
+        <td>{{ score.math }}</td>
+        <td>{{ score.science }}</td>
+        <td>{{ score.english }}</td>
+    </tr>
+{% endfor %}
+</table>
+{% endblock %}
+
+
+<!--
+<html>
+    <head>
+        <title>점수</title>
+    </head>
+    <body>
+        <table>
+            <thead>
+                <tr>
+                    <td>이름</td><td>수학</td><td>과학</td><td>영어</td>
+                </tr>
+            </thead>
+        {% for score in scores %}
+        <tr>
+            <td>{{ score.name }}</td>
+            <td>{{ score.math }}</td>
+            <td>{{ score.science }}</td>
+            <td>{{ score.english }}</td>
+        </tr>
+        {% endfor %}
+    </body>
+</html>
+-->
+<!-- 레이아웃을 쓰면 위 코드가 아래처럼 바뀜-->

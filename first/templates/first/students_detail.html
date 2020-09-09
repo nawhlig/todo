@@ -1,0 +1,31 @@
+{% extends 'first/layout.html' %}
+{% block title %}
+<title>학생들</title>
+{% endblock %}
+{% block content %}
+    <div>
+        {{ student.name }}
+        {{ student.address }}
+        {{ student.email }}
+    </div>
+{% endblock %}
+
+<!--
+<html>
+    <head>
+        <title>학생들</title>
+    </head>
+
+    <body>
+        <h3>{{ text }}</h3>
+        {% for student in students %}
+        <div>
+            {{ student.name }}
+            {{ student.address }}
+            {{ student.email }}
+        </div>
+        {% endfor %}
+    </body>
+</html>
+-->
+<!-- 위 코드가 레이아웃을 활용하면 아래처럼 바뀜 -->

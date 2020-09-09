@@ -1,0 +1,23 @@
+{% extends 'second/layout.html' %}
+{% load static %}
+
+{% block title %}
+<title>즐겨찾기</title>
+{% endblock %}
+
+{% block content %}
+<div id="pagetitle">{{ views_favourite.name }}
+<img src="{% static 'second/images/icon_modify.png'%}"/>
+<img src="{% static 'second/images/icon_delete.png'%}"/>
+</div>
+    <div id="box">
+        <div id="db_list_detail">
+            <div><p>등록번호</p><span>{{ views_favourite.seq }}</span></div>
+            <div><p>명칭</p><span>{{ views_favourite.name }}</span></div>
+            <div><p>url</p><span>{{ views_favourite.url }}</span></div>
+            <div><p>메모</p><span>{{ views_favourite.memo }}</span></div>
+            <div><p>등록일</p><span>{{ views_favourite.reg_date | date:"Y-m-d" }}</span></div>
+            <div><p>그룹</p><span>{{ views_favourite.group }}</span></div>
+        </div>    
+    </div>
+{% endblock %}

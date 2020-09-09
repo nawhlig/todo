@@ -1,0 +1,21 @@
+{% extends 'second/layout.html' %}
+{% load static %}
+
+{% block title %}
+<title>즐겨찾기</title>
+{% endblock %}
+
+{% block content %}
+<div id="pagetitle">{{ views_todo.name }}</div>
+    <div id="box">
+        <div id="db_list_detail">
+            <div><p>등록번호</p><span>{{ views_todo.seq }}</span></div>
+            <div><p>할일</p><span>{{ views_todo.name }}</span></div>
+            <div><p>상태</p><span>{{ views_todo.status }}</span></div>
+            <div><p>등록일</p><span>{{ views_todo.reg_date }}</span></div>
+            <div><p>종료일</p><span>{{ views_todo.end_date | date:"Y-m-d" }}</span></div>
+            <div><p>삭제여부</p><span>{{ views_todo.del_yn }}</span></div>
+            <div><p>그룹</p><span>{{ views_todo.group }}</span></div>
+        </div>    
+    </div>
+{% endblock %}

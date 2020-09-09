@@ -1,0 +1,23 @@
+{% extends 'second/layout.html' %}
+{% load static %}
+
+{% block title %}
+<title>즐겨찾기</title>
+{% endblock %}
+
+{% block content %}
+<div id="pagetitle">{{ text }}
+<img src="{% static 'second/images/icon_add.png'%}"/>
+</div>
+    <div id="box">
+        {% for views_favourite_contents in views_favourites %}
+            <div id="db_list" onclick="location.href='{% url 'second:favourite' views_favourite_contents.seq %}';">
+                <div id="name">{{ views_favourite_contents.name }}</div>
+                <div id="reg_date">{{ views_favourite_contents.reg_date | date:"Y-m-d" }}</div>
+                <!--<div id="group">{{ views_favourite_contents.group }}</div>-->
+                <div><img src="{% static 'second/images/icon_more.png'%}"/></div>
+            </div>
+        {% endfor %}
+        </div>
+{% endblock %}
+
