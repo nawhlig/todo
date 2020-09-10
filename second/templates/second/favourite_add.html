@@ -1,0 +1,26 @@
+{% extends 'second/layout.html' %}
+{% load static %}
+
+{% block title %}
+<title>즐겨찾기 등록</title>
+{% endblock %}
+
+{% block content %}
+<div id="pagetitle">{{ "즐겨찾기 등록" }}
+    <div id="icon" onclick="location.href='{% url 'second:favourite_add' %}';">
+        <img src="{% static 'second/images/icon_modify.png'%}"/></div>
+    <div id="icon" onclick="location.href='{% url 'second:favourite_add' %}';">
+        <img src="{% static 'second/images/icon_delete.png'%}"/></div>
+</div>
+    <div id="box">
+        <div id="db_list_detail">
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <table>
+                    {{ form.as_table }}
+                </table>
+                <input type="submit" value="등록"/>
+            </form>
+        </div>    
+    </div>
+{% endblock %}

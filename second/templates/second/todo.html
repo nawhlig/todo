@@ -7,7 +7,9 @@
 
 {% block content %}
 <div id="pagetitle">{{ text }}
-<img src="{% static 'second/images/icon_add.png'%}"/>
+    <div id="icon" onclick="location.href='{% url 'second:todo_add' %}';">
+    <img src="{% static 'second/images/icon_add.png'%}"/>
+    </div>
 </div>
     <div id="box">
         <div class="todo_section">

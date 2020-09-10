@@ -1,16 +1,18 @@
 {% extends 'first/layout.html' %}
- {% block title %}
+{% block title %}
  <title>점수</title>
- {% endblock %}
- {% block content %}
- <table>
- <thead>
+{% endblock %}
+{% block content %}
+ 
+<table>
+<thead>
     <tr>
-        <td>이름</td><td>수학</td><td>과학</td><td>영어</td>
+        <td>id</td><td>이름</td><td>수학</td><td>과학</td><td>영어</td>
     </tr>
 </thead>
 {% for score in scores %} <!-- for문 아래 있는 내용이 반복되며 출력됨-->
     <tr>
+        <td>{{ score.id }}</td>
         <td>{{ score.name }}</td>
         <td>{{ score.math }}</td>
         <td>{{ score.science }}</td>
@@ -18,6 +20,7 @@
     </tr>
 {% endfor %}
 </table>
+<a href="{% url 'first:scores_add' %}">점수등록</a>
 {% endblock %}
 
 

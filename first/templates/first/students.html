@@ -8,11 +8,14 @@
     {% for student in students %}
     <!-- 요 안에있는 내용들이 반복됩니다 -->
     <div>
+        {{ student.id }}
         {{ student.name }}
         {{ student.address }}
         {{ student.email }}
+        <a href="{% url 'first:student_modify' student.id %}">수정하기</a>
     </div>
     {% endfor %}
+    <a href="{% url 'first:student_add' %}">등록하기</a>
 {% endblock %}
 
 <!--
@@ -33,4 +36,4 @@
     </body>
 </html>
 -->
-<!-- 위 코드가 레이아웃을 활용하면 아래처럼 바뀜 -->
+<!-- 위 코드가 레이아웃을 활용하면 위에처럼 바뀜 -->

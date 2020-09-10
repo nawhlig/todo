@@ -11,28 +11,30 @@ output, ruby, section, summary, time, mark, audio, video {
     vertical-align: baseline;
 }
 
-a:link { text-decoration:none; color:#ffffff;}
-a:visited { text-decoration:none;color:#ffffff;}
-a:active {text-decoration:none; color:#ffffff; }
-a:hover { text-decoration:none; color:#EDA900;}
+a:link { text-decoration:none; color:#ffffff; }
+a:visited { text-decoration:none;color:#ffffff; }
+a:active { text-decoration:none; color:#ffffff; }
+a:hover { text-decoration:none; color:#ff0080; }
+
 
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {display: block;}
-body {line-height: 1; background-color: white;}
+/* html {height: 100%;} */
+body {background-color: rgba(245, 241, 241, 0.726);}
 ol, ul, li {list-style: none;}
 blockquote, q {quotes: none;}
 blockquote:before, blockquote:after, q:before, q:after {content: ''; content: none;}
 table {border-collapse: collapse; border-spacing: 0;}
 
+
 #manubar, #contents{ float: left;
                      box-sizing: border-box;
-                     height:100%;
-                     background-color: white;
                      }
-
+#contents{ width: 950px;}
 #manubar{ width: 220px;
           background-color: #4452ac;
           color: white;
+          height:100%
           }
 
 #manubar h1{ padding-top: 50px;
@@ -45,7 +47,7 @@ table {border-collapse: collapse; border-spacing: 0;}
 .manubar_button{ margin: 5px;
                  padding-left: 25px;
                  height:50px;
-                 color: white;
+                 color: rgb(211, 187, 243);
                  font-size: 16px;
                  font-weight: bold;
                  line-height: 3;
@@ -58,28 +60,31 @@ table {border-collapse: collapse; border-spacing: 0;}
                     margin-right: 10px;
                 }
 
-#contents{ width: 950px; clear:right;}
+
 
 #pagetitle{ margin-top: 100px;
             margin-left: 100px;
             margin-right: 90px;
             padding-bottom: 20px;
-            border-bottom: 0.1px solid rgb(194, 194, 194);
+            border-bottom: 0.1px solid rgb(252, 2, 2);
             font-size: 30px;
             }
 
-#pagetitle img{ width: auto;
-                height: 20;
-                margin-left: 10px;
-                margin-right: 10px;
-                float: right;
-                }
+#icon{ box-sizing: border-box;
+       width: 40px; 
+       height: 40px;
+       padding: 10px;
+       float: right;
+       cursor: pointer;}
+
+#icon img{ width: auto;
+           height: 20px;
+        }
 
 #box{ margin: 0 auto;
       padding-right: 100px;
       padding-left: 100px;
       padding-top: 50px;
-      height:100%;
       width: 750px;
       /*background-color: gray;*/
       }
@@ -90,6 +95,7 @@ table {border-collapse: collapse; border-spacing: 0;}
                           padding-bottom: 18px;
                           border: 0.1px solid rgb(194, 194, 194);
                           }
+
 #db_list{ cursor: pointer;}
           
 #db_list #name{ float: left;
@@ -109,6 +115,10 @@ table {border-collapse: collapse; border-spacing: 0;}
                  margin-left: 30px;
                  /*font-weight: bold;*/
                  }
+
+table { border-collapse: separate; border-spacing: 15px 10px; }
+input { margin-top: 30px; }
+
 #db_list_detail > div{ height: 30px; line-height: 30px;}
 #db_list_detail > div > p{ float:left;
                           width:200px;

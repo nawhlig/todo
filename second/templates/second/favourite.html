@@ -7,8 +7,11 @@
 
 {% block content %}
 <div id="pagetitle">{{ text }}
-<img src="{% static 'second/images/icon_add.png'%}"/>
+    <div id="icon" onclick="location.href='{% url 'second:favourite_add' %}';">
+    <img src="{% static 'second/images/icon_add.png'%}"/>
+    </div>
 </div>
+
     <div id="box">
         {% for views_favourite_contents in views_favourites %}
             <div id="db_list" onclick="location.href='{% url 'second:favourite' views_favourite_contents.seq %}';">
@@ -18,6 +21,7 @@
                 <div><img src="{% static 'second/images/icon_more.png'%}"/></div>
             </div>
         {% endfor %}
-        </div>
+    </div>
+
 {% endblock %}
 

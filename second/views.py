@@ -1,8 +1,11 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-from .models import Favourite, Todo
+from django.shortcuts import render, redirect
+from django.views.decorators.csrf import csrf_exempt  # csrf 보안
+from django.http import HttpResponse, Http404
+from .models import Favourite, Todo  # 모델 호출 define
+from .forms import FavouriteModelForm, TodoModelForm  # 모델 폼사용 메소드 호출 define
 
 
+@csrf_exempt
 def index(request):
     return render(request, "second/index.html")
 
@@ -21,6 +24,66 @@ def favourite_detail(request, id):
     db_favourite = Favourite.objects.get(pk=id)
     # 템플릿한테 보내주기
     return render(request, "second/favourite_detail.html", {"views_favourite": db_favourite})
+
+
+# 모델 폼 사용시 코드
+def favourite_add(request):
+    if request.method == "GET":
+        form = FavouriteModelForm()
+        return render(request, "second/favourite_add.html", {"form": form})
+
+    elif request.method == "POST":
+        form = FavouriteModelForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            post = form.save()  # 모델에 연관된 폼이라 바로 저장이 가능하다
+            return redirect("second:favourite")
+        else:  # 검사가 잘 안된경우 원래의 폼을 forms에 정의한 기능의 에러메시지와 함께 전달 ; 다시 폼으로 이동을 해라는 의미
+            return render(request, "second/favourite_add.html", {"form": form})
+
+
+# 모델 폼 사용코드 (모델에 입력된 데이터 수정하는 기능)
+def favourite_modify(request, id):
+    # 수정할 id 값이 없을 때 처리 (페이지 없음 보여주기: 방법1)
+    try:
+        db_favourite = Favourite.objects.get(pk=id)  # 디비에서 데이터가져와서
+    except:
+        raise Http404("수정할 데이터가 없습니다.")
+
+    # 수정할 id 값이 없을 때 처리 (페이지 없음 보여주기: 방법2)
+    # student = get_object_or_404(Students, pk=id)  # 디비에서 데이터가져와서
+
+    if request.method == "GET":  # 브라우저에서 get으로 요청하면
+        form = FavouriteModelForm(instance=db_favourite)  # 폼에 데이터 전달
+        return render(request, "second/favourite_modify.html", {"form": form})
+
+    elif request.method == "POST":  # 브라우저에서 post 로 전달하면
+        form = FavouriteModelForm(request.POST, instance=db_favourite)
+        if form.is_valid():
+            form.save()  # 모델에 연관된 폼이라 바로 저장이 가능하다
+            return redirect("second:favourite")
+        else:  # 검사가 잘 안된경우 원래의 폼을 forms에 정의한 기능의 에러메시지와 함께 전달 ; 다시 폼으로 이동을 해라는 의미
+            return render(request, "second/favourite_add.html", {"form": form})
+
+
+def favourite_delete(request, id):
+    # 수정할 id 값이 없을 때 처리 (페이지 없음 보여주기: 방법1)
+    try:
+        db_favourite = Favourite.objects.get(pk=id)  # 디비에서 데이터가져와서
+    except:
+        raise Http404("삭제할 데이터가 없습니다.")
+
+    db_favourite.delete()
+    return redirect("second:favourite")
+    # 수정할 id 값이 없을 때 처리 (페이지 없음 보여주기: 방법2)
+    # student = get_object_or_404(Students, pk=id)  # 디비에서 데이터가져와서
+
+    # if request.method == "GET":  # 브라우저에서 get으로 요청하면
+    #     return redirect("second:favourite")
+
+    # elif request.method == "POST":  # 브라우저에서 post 로 전달하면
+    #     db_favourite.delete()
+    #     return redirect("second:favourite")
 
 
 def todo(request):
@@ -53,55 +116,50 @@ def todo_detail(request, id):
     return render(request, "second/todo_detail.html", {"views_todo": db_todo_detail})
 
 
-# 쿼리 실습문제
-# name에 외식이 들어가 있는 할 일을 검색
-# Todo.objects.filter(name__contains='외식').values()
+def todo_add(request):
+    if request.method == "GET":
+        form = TodoModelForm()
+        return render(request, "second/todo_add.html", {"form": form})
 
-# 종료날짜가 3월에 있는 할일을 검색해주세요
-# Todo.objects.filter(end_date__gte='2020-03-01',end_date__lte='2020-03-31').values()
-
-# 현재 공부중 inprogress 상태인 것들을 검색해주세요
-# Todo.objects.filter(group__name='공부',status='inprogress').values()
-
-# 현재 공부나 가족중 완료된것들을 검색해주세요
-# Todo.objects.filter((Q(group__name='공부') | Q(group__name='가족')) & Q(status='end')).values()
-# Todo.objects.filter(Q(group__name='공부') | Q(group__name='가족')).filter(status='end').values()
-
-# 현재 공부인 항목들을 종료날짜기준 내림차순으로 정렬해주세요
-# Todo.objects.filter(group__name='공부').order_by('-end_date').values()
+    elif request.method == "POST":
+        form = TodoModelForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save()  # 모델에 연관된 폼이라 바로 저장이 가능하다
+            return redirect("second:todo")
+        else:  # 검사가 잘 안된경우 원래의 폼을 forms에 정의한 기능의 에러메시지와 함께 전달 ; 다시 폼으로 이동을 해라는 의미
+            return render(request, "second/todo_add.html", {"form": form})
 
 
-# 실습문제
-# python manage.py shell
-# second.models form Todo
-# second.models form TodoGroup
-# TodoGroup.objects.all().values()
-# Todo.objects.create(name='어머니생신',status='pending',end_date='2020-10-07',group_id=1)
-# Todo.objects.create(name='아버지생신',status='end',end_date='2020-03-07',group_id=1)
-# Todo.objects.create(name='가족외식',status='pending',end_date='2020-11-07',group_id=1)
-# Todo.objects.create(name='가족외식',status='end',end_date='2020-03-07',group_id=1)
-# Todo.objects.create(name='SQL',status='end',end_date='2020-08-24',group_id=2)
-# Todo.objects.create(name='웹프로그래밍기초',status='end',end_date='2020-08-30',group_id=2)
-# Todo.objects.create(name='Django',status='inprogress',end_date='2020-09-06',group_id=2)
-# Todo.objects.create(name='React',status='inprogress',end_date='2020-09-15',group_id=2)
-# Todo.objects.create(name='회사이사',status='pending',end_date='2020-10-20',group_id=3)
-# Todo.objects.all().values()
+# 모델 폼 사용코드 (모델에 입력된 데이터 수정하는 기능)
+def todo_modify(request, id):
+    # 수정할 id 값이 없을 때 처리 (페이지 없음 보여주기: 방법1)
+    try:
+        db_todo = Todo.objects.get(pk=id)  # 디비에서 데이터가져와서
+    except:
+        raise Http404("수정할 데이터가 없습니다.")
 
-# 장고 쉘에서 ORM 이용방법
-# 추가
-# Favourite.objects.create(name='네이버2',url='https://naver.com',memo='Memo',group_id=2)
-# favourite = Favourite()
-# favourite.name = '네이버3'
-# favourite.url = 'https://naver.com'
-# favourite.memo = '메모3'
-# favourite.group_id = 1
-# favourite.save()
-# Favourite.objects.all().values()
-# 수정
-# favourite = Favourite.objects.get(pk=4)
-# favourite.name = '네이버2입니다'
-# favourite.save()
-# Favourite.objects.all().values()
-# 삭제
-# favourite = Favourite.objects.get(pk=4)
-# favourite.delete()
+    # 수정할 id 값이 없을 때 처리 (페이지 없음 보여주기: 방법2)
+    # student = get_object_or_404(Students, pk=id)  # 디비에서 데이터가져와서
+
+    if request.method == "GET":  # 브라우저에서 get으로 요청하면
+        form = TodoModelForm(instance=db_todo)  # 폼에 데이터 전달
+        return render(request, "second/todo_modify.html", {"form": form})
+
+    elif request.method == "POST":  # 브라우저에서 post 로 전달하면
+        form = TodoModelForm(request.POST, instance=db_todo)
+        if form.is_valid():
+            form.save()  # 모델에 연관된 폼이라 바로 저장이 가능하다
+            return redirect("second:todo")
+        else:  # 검사가 잘 안된경우 원래의 폼을 forms에 정의한 기능의 에러메시지와 함께 전달 ; 다시 폼으로 이동을 해라는 의미
+            return render(request, "second/todo_add.html", {"form": form})
+
+
+def todo_delete(request, id):
+    # 수정할 id 값이 없을 때 처리 (페이지 없음 보여주기: 방법1)
+    try:
+        db_todo = Todo.objects.get(pk=id)  # 디비에서 데이터가져와서
+    except:
+        raise Http404("삭제할 데이터가 없습니다.")
+
+    db_todo.delete()
+    return redirect("second:todo")

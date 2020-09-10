@@ -1,13 +1,13 @@
 <html>
-<head>
-    {% block title %}
-    {% endblock %}
-</head>
-<body>
-    <a href="{% url 'first:index' %}"/>홈</a>
-    <a href="{% url 'first:students' %}"/>학생정보</a>
-    <a href="{% url 'first:scores' %}"/>점수정보</a>
-    {% block content %}
-    {% endblock %}
-</body>
+    <head>
+        {% block title %}
+        {% endblock %}
+    </head>
+    <body>
+        <a href="{% url 'first:index' %}"/>홈</a>
+        <a href="{% url 'first:students' %}"/>학생정보</a>
+        <a href="{% url 'first:scores' %}"/>점수정보</a>
+        {% block content %}
+        {% endblock %}
+    </body>
 </html>

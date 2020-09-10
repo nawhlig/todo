@@ -2,11 +2,16 @@
 {% load static %}
 
 {% block title %}
-<title>즐겨찾기</title>
+<title>to do</title>
 {% endblock %}
 
 {% block content %}
-<div id="pagetitle">{{ views_todo.name }}</div>
+<div id="pagetitle">{{ views_todo.name }}
+    <div id="icon" onclick="location.href='{% url 'second:todo_delete' views_todo.seq %}';">
+        <img src="{% static 'second/images/icon_delete.png'%}"/></div>
+    <div id="icon" onclick="location.href='{% url 'second:todo_modify' views_todo.seq %}';">
+        <img src="{% static 'second/images/icon_modify.png'%}"/></div>
+</div>
     <div id="box">
         <div id="db_list_detail">
             <div><p>등록번호</p><span>{{ views_todo.seq }}</span></div>

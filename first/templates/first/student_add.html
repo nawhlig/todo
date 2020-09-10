@@ -1,0 +1,27 @@
+<!--
+<form action="{% url 'first:student_add' %}" method="post"> <!--urls의 path와 매핑하여 url 생성-->
+<!--{% csrf_token %} <!--Cross Site Request Forgery 악성 스크립트를 서버에 요청 공격방지-->
+<!--<div>
+<label>이름 : </label>
+<input name="name" type="text"/>
+</div>
+<div>
+<label>주소 : </label>
+<input name="address" type="text"/>
+</div>
+<div>
+<label>메일 : </label>
+<input name="email" type="email"/>
+</div>
+<input type="submit" value="등록"/>
+</form>
+-->
+<!--장고 폼-->
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+    <input type="submit" value="등록"/>
+</form>
+    

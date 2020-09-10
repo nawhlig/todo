@@ -7,8 +7,10 @@
 
 {% block content %}
 <div id="pagetitle">{{ views_favourite.name }}
-<img src="{% static 'second/images/icon_modify.png'%}"/>
-<img src="{% static 'second/images/icon_delete.png'%}"/>
+    <div id="icon" onclick="location.href='{% url 'second:favourite_delete' views_favourite.seq %}';">
+        <img src="{% static 'second/images/icon_delete.png'%}"/></div>
+    <div id="icon" onclick="location.href='{% url 'second:favourite_modify' views_favourite.seq %}';">
+        <img src="{% static 'second/images/icon_modify.png'%}"/></div>
 </div>
     <div id="box">
         <div id="db_list_detail">

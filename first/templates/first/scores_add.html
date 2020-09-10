@@ -1,0 +1,23 @@
+
+<form action="{% url 'first:scores_add' %}" method="post"> <!--urls의 path와 매핑하여 url 생성-->
+{% csrf_token %} <!--Cross Site Request Forgery 악성 스크립트를 서버에 요청 공격방지-->
+<div>
+<label>이름 : </label>
+<input name="name" type="text"/>
+</div>
+<div>
+<label>수학 : </label>
+<input name="math" type="number" min="0" max="100"/>
+</div>
+<div>
+<label>영어 : </label>
+<input name="english" type="number" min="0" max="100"/>
+</div>
+<div>
+<label>과학 : </label>
+<input name="science" type="number" min="0" max="100"/>
+</div>
+<div>
+<input type="submit" value="등록"/>
+</div>
+</form>
