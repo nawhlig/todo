@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-<title>Todo&Favourite</title>
+<title>Sign in</title>
 {% endblock %}
 
 {% block content %}
@@ -15,8 +15,14 @@
 -->
 </div>
     <div id="box">
-    <h1> 어서오세요. 회원 인증 되었습니다.<h1>
-    {{ request.user.is_authenticated }}
-    {{ request.user.username }}
+        <div id="form">
+        <form action="" method="post">
+            {% csrf_token %}
+            <table>
+            {{ form.as_table }}
+            </table>
+            <input type="submit" value="로그인"/>
+        </form>
+        </div>
     </div>
 {% endblock %}

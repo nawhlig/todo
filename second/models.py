@@ -1,6 +1,6 @@
 from django.db import models
 from django import forms  # 유효성 검사와 모델폼을 쓰기 위해서 forms 호출
-
+from django.contrib.auth.models import AbstractUser
 
 # 모델 폼에서의 유효성검사 는 여기서!!! 정의하고
 # 모델 클래스에 필드 뒤에 메소드 추가
@@ -10,6 +10,10 @@ def min_length_3(value):  # value 로 들어온 값에대해 검사를 하자!
 
 
 # Create your models here.
+
+
+class User(AbstractUser):
+    phone_number = models.CharField(max_length=20, blank=True)
 
 
 class FavouriteGroup(models.Model):

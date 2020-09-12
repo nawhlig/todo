@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt  # csrf 보안
+from django.contrib.auth import login, logout
 from django.http import HttpResponse, Http404
 from .models import Favourite, Todo  # 모델 호출 define
-from .forms import FavouriteModelForm, TodoModelForm  # 모델 폼사용 메소드 호출 define
+from .forms import FavouriteModelForm, TodoModelForm, SignupForm, SigninForm  # 폼사용 메소드 호출 define
 
 
 @csrf_exempt
@@ -12,10 +13,10 @@ def index(request):
 
 def favourite(request):
     # 디비에서 데이터가져와서
-    db_favourite_all = Favourite.objects.all()  # SELECT * FROM Favourite 의 의미
+    db_favourite = Favourite.objects.all()  # SELECT * FROM Favourite 의 의미
     # 템플릿한테 보내주기
     return render(
-        request, "second/favourite.html", {"text": "즐겨찾기", "views_favourites": db_favourite_all}
+        request, "second/favourite.html", {"text": "즐겨찾기", "views_favourite": db_favourite}
     )
 
 
@@ -33,7 +34,7 @@ def favourite_add(request):
         return render(request, "second/favourite_add.html", {"form": form})
 
     elif request.method == "POST":
-        form = FavouriteModelForm(request.POST, request.FILES)
+        form = FavouriteModelForm(request.POST)
 
         if form.is_valid():
             post = form.save()  # 모델에 연관된 폼이라 바로 저장이 가능하다
@@ -163,3 +164,30 @@ def todo_delete(request, id):
 
     db_todo.delete()
     return redirect("second:todo")
+
+
+def signup(request):
+    if request.method == "GET":
+        form = SignupForm()
+        return render(request, "second/signup.html", {"form": form})
+    elif request.method == "POST":
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("second:index")
+        else:
+            return render(request, "second/signup.html", {"form": form})
+
+
+def signin(request):
+    if request.method == "GET":
+        form = SigninForm()
+        return render(request, "second/signin.html", {"form": form})
+    elif request.method == "POST":
+        form = SigninForm(request, request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect("second:index")
+        else:
+            return render(request, "second/signin.html", {"form": form})

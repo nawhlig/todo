@@ -12,4 +12,5 @@ urlpatterns = [
     path("students/modify/<int:id>", views.student_modify, name="student_modify"),
     path("scores", views.scores, name="scores"),
     path("sscores/add", views.scores_add, name="scores_add"),
+    path("makecookie/<name>", views.make_cookie, name="make_cookie"),
 ]

@@ -8,10 +8,34 @@
     {% for student in students %}
     <!-- 요 안에있는 내용들이 반복됩니다 -->
     <div>
-        {{ student.id }}
-        {{ student.name }}
-        {{ student.address }}
-        {{ student.email }}
+        <div>
+            {{ student.id }}
+            {{ student.name }}
+            {{ student.address }}
+            {{ student.email }}
+        </div>
+        <div>
+            {% if student.file1 %}
+                <a href="{{ student.file1.url }}">   {{ student.file1 }}</a>
+            {% endif %}
+        </div>
+        <div>
+            {% if student.file2 %}
+                <a href="{{ student.file2.url }}">   {{ student.file2 }}</a>
+            {% endif %}
+        </div>
+        <div>
+            {% if student.img1 %}
+                {{ student.img1 }}
+                <img src="{{ student.img1.url }}" style="width:10px"/>
+            {% endif %}
+        </div>
+        <div>
+            {% if student.img2 %}
+                {{ student.img2 }}
+                <img src="{{ student.img2.url }}" style="width:10px"/>
+            {% endif %}
+        </div>
         <a href="{% url 'first:student_modify' student.id %}">수정하기</a>
     </div>
     {% endfor %}

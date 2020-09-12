@@ -1,5 +1,31 @@
 from django import forms
-from .models import Favourite, Todo
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from .models import Favourite, Todo, User
+
+# 장고의 회원가입(UserCreationForm) 폼 활용하기
+class SignupForm(UserCreationForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["password1"].Label = "암호 입력"
+        self.fields["password1"].help_text = ""
+        self.fields["password2"].Label = "암호 재입력"
+        self.fields["password2"].help_text = ""
+
+    class Meta(UserCreationForm.Meta):
+        model = User
+        fields = ["username", "email", "phone_number"]
+        labels = {"username": "ID", "email": "E-mail", "phone_number": "핸드폰"}
+
+
+# 장고의 로그인(AuthenticationForm) 폼 활용하기
+class SigninForm(AuthenticationForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.error_messages["invalid_login"] = "아이디, 패스워드를 확인해주세요"
+
+    class Meta(UserCreationForm.Meta):
+        model = User
+        fields = ["username", "password"]
 
 
 # 모델 폼 형식

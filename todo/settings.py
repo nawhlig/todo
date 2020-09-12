@@ -118,10 +118,14 @@ USE_L10N = True
 
 USE_TZ = True
 
-
+AUTH_USER_MODEL = "second.User"
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = "/static/"
 # 앱별로 스태틱 폴더를 만들어서 참조가 가능하게 만들자
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+
+# 업로드한 파일 저장소 세팅
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")

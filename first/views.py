@@ -47,7 +47,7 @@ def student_modify(request, id):
         return render(request, "first/student_modify.html", {"form": form})
 
     elif request.method == "POST":  # 브라우저에서 post 로 전달하면
-        form = StudentModelForm(request.POST, instance=students)
+        form = StudentModelForm(request.POST, request.FILES, instance=students)
         if form.is_valid():
             form.save()  # 모델에 연관된 폼이라 바로 저장이 가능하다
             return redirect("first:students")
@@ -62,6 +62,7 @@ def student_add(request):
         return render(request, "first/student_add.html", {"form": form})
 
     elif request.method == "POST":
+        # 폼에서 데이터와 파일 업로드를 위해 request.POST, request.FILES 를 써준다.
         form = StudentModelForm(request.POST, request.FILES)
 
         if form.is_valid():
@@ -184,3 +185,9 @@ def scores_add(request):
 # 삭제
 # favourite = Favourite.objects.get(pk=4)
 # favourite.delete()
+
+
+def make_cookie(request, name):
+    res = HttpResponse()
+    res.set_cookie("name", name)
+    return res
