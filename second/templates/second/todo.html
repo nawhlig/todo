@@ -15,7 +15,7 @@
         <div class="todo_section">
             <div class="todo_subject">대기중</div>
             {% for contants in views_todo_pending %}
-            <div class="todo_contents" onclick="location.href='{% url 'second:todo' contants.seq %}';">
+            <div class="todo_contents" onclick="location.href='{% url 'second:todo_detail' contants.seq %}';">
                 <div id="name">{{ contants.name }}</div>
                 <div id="end_date">{{ contants.end_date | date:"Y-m-d" }}</div>
                 <!--<div id="group">{{ contants.group }}</div>-->
@@ -26,7 +26,7 @@
         <div class="todo_section">
             <div class="todo_subject">진행중</div>
             {% for contents in views_todo_inprogress %}
-            <div class="todo_contents" onclick="location.href='{% url 'second:todo' contents.seq %}';">
+            <div class="todo_contents" onclick="location.href='{% url 'second:todo_detail' contents.seq %}';">
                 <div id="name">{{ contents.name }}</div>  <!-- 할일 -->
                 <div id="end_date">{{ contents.end_date | date:"Y-m-d" }}</div>  <!-- 목적일-->
                 <!--<div id="group">{{ contents.group }}</div>  <!-- 범주-->
@@ -37,7 +37,7 @@
         <div class="todo_section">
             <div class="todo_subject">완료됨</div>
             {% for contents in views_todo_end %}
-            <div class="todo_contents" onclick="location.href='{% url 'second:todo' contents.seq %}';">
+            <div class="todo_contents" onclick="location.href='{% url 'second:todo_detail' contents.seq %}';">
                 <div id="name">{{ contents.name }}</div>  <!-- 할일 -->
                 <div id="end_date">{{ contents.end_date | date:"Y-m-d" }}</div>  <!-- 목적일-->
                 <!--<div id="group">{{ contents.group }}</div>  <!-- 범주-->

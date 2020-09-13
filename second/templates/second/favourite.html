@@ -13,7 +13,7 @@
 </div>
     <div id="box">
         {% for views_favourite_contents in views_favourite %}
-            <div id="db_list" onclick="location.href='{% url 'second:favourite' views_favourite_contents.seq %}';">
+            <div id="db_list" onclick="location.href='{% url 'second:favourite_detail' views_favourite_contents.seq %}';">
                 <div id="name">{{ views_favourite_contents.name }}</div>
                 <div id="reg_date">{{ views_favourite_contents.reg_date | date:"Y-m-d" }}</div>
                 <div><img src="{% static 'second/images/icon_more.png'%}"/></div>
