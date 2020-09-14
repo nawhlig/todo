@@ -6,6 +6,10 @@
 {% endblock %}
 
 {% block content %}
+<div id="sign">
+    <span onclick="location.href='{% url 'second:signin_ok' %}';">{{ request.user.username }} 님 </span>
+    <span onclick="location.href='{% url 'second:signout' %}';">로그아웃</span>
+</div>
 <div id="pagetitle">{{ text }}
     <div id="icon" onclick="location.href='{% url 'second:todo_add' %}';">
     <img src="{% static 'second/images/icon_add.png'%}"/>
@@ -19,7 +23,13 @@
                 <div id="name">{{ contants.name }}</div>
                 <div id="end_date">{{ contants.end_date | date:"Y-m-d" }}</div>
                 <!--<div id="group">{{ contants.group }}</div>-->
-                <div><img src="{% static 'second/images/icon_more.png'%}"/></div>
+                <div class="dropdown"><img src="{% static 'second/images/icon_more.png'%}"/>
+                    <div class="dropdown-content">
+                        <a href="{% url 'second:todo_delete' contants.seq %}">삭제</a>
+                        <a href="{% url 'second:todo_modify' contants.seq %}">진행중</a>
+                        <a href="{% url 'second:todo_modify' contants.seq %}">완료됨</a>
+                    </div>                
+                </div>
             </div>
             {% endfor %}
         </div>
@@ -30,7 +40,7 @@
                 <div id="name">{{ contents.name }}</div>  <!-- 할일 -->
                 <div id="end_date">{{ contents.end_date | date:"Y-m-d" }}</div>  <!-- 목적일-->
                 <!--<div id="group">{{ contents.group }}</div>  <!-- 범주-->
-                <div><img src="{% static 'second/images/icon_more.png'%}"/></div>
+                <div class="dropdown"><img src="{% static 'second/images/icon_more.png'%}"/></div>
             </div>
             {% endfor %}
         </div>
@@ -41,7 +51,7 @@
                 <div id="name">{{ contents.name }}</div>  <!-- 할일 -->
                 <div id="end_date">{{ contents.end_date | date:"Y-m-d" }}</div>  <!-- 목적일-->
                 <!--<div id="group">{{ contents.group }}</div>  <!-- 범주-->
-                <div><img src="{% static 'second/images/icon_more.png'%}"/></div>
+                <div class="dropdown"><img src="{% static 'second/images/icon_more.png'%}"/></div>
             </div>
             {% endfor %}
         </div>    

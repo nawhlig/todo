@@ -6,6 +6,10 @@
 {% endblock %}
 
 {% block content %}
+<div id="sign">
+    <span onclick="location.href='{% url 'second:signin_ok' %}';">{{ request.user.username }} 님 </span>
+    <span onclick="location.href='{% url 'second:signout' %}';">로그아웃</span>
+</div>
 <div id="pagetitle">{{ "즐겨찾기 등록" }}
 </div>
     <div id="box">

@@ -6,6 +6,10 @@
 {% endblock %}
 
 {% block content %}
+<div id="sign">
+    <span onclick="location.href='{% url 'second:signin' %}';">로그인</span>
+    <span onclick="location.href='{% url 'second:signup' %}';">회원가입</span>
+</div>
 <div id="pagetitle">{{ "로그인" }}
 <!--
     <div id="icon" onclick="location.href='{% url 'second:todo_add' %}';">

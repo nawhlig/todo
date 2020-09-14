@@ -6,9 +6,11 @@ app_name = "second"
 
 urlpatterns = [
     # path (url address "text format" , view function address&name , tag name "text format")
-    path("", views.signin, name="signin"),
+    path("", views.index, name="index"),
     path("signup", views.signup, name="signup"),
     path("signin", views.signin, name="signin"),
+    path("signin/ok", views.signin_ok, name="signin_ok"),
+    path("signout", views.signout, name="signout"),
     path("index", views.index, name="index"),
     path("favourite", views.favourite, name="favourite"),
     path("favourite/<int:id>", views.favourite_detail, name="favourite_detail"),

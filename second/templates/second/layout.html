@@ -12,7 +12,12 @@
         <ul> 
             <li class="manubar_button">
                 <img src="{% static 'second/images/icon_home.png'%}"/>
-                <a href="{% url 'second:index' %}">HOME</a>
+                {% if request.user.is_authenticated == True %}
+                    <a href="{% url 'second:signin_ok' %}">
+                {% else %}
+                    <a href="{% url 'second:index' %}">
+                {% endif %}
+                HOME</a>
             </li>
             <li class="manubar_button">
                 <img src="{% static 'second/images/icon_favorite.png'%}"/>

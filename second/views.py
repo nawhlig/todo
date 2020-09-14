@@ -1,7 +1,8 @@
+from django.contrib.auth import login, logout
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt  # csrf 보안
-from django.contrib.auth import login, logout
-from django.http import HttpResponse, Http404
 from .models import Favourite, Todo  # 모델 호출 define
 from .forms import FavouriteModelForm, TodoModelForm, SignupForm, SigninForm  # 폼사용 메소드 호출 define
 
@@ -11,6 +12,7 @@ def index(request):
     return render(request, "second/index.html")
 
 
+@login_required
 def favourite(request):
     # 디비에서 데이터가져와서
     db_favourite = Favourite.objects.all()  # SELECT * FROM Favourite 의 의미
@@ -87,6 +89,7 @@ def favourite_delete(request, id):
     #     return redirect("second:favourite")
 
 
+@login_required
 def todo(request):
     # DB 데이터 추출
     db_todo = Todo.objects
@@ -188,6 +191,15 @@ def signin(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect("second:index")
+            return redirect("second:signin_ok")
         else:
             return render(request, "second/signin.html", {"form": form})
+
+
+def signin_ok(request):
+    return render(request, "second/signin_ok.html")
+
+
+def signout(request):
+    logout(request)
+    return redirect("second:index")

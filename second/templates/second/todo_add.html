@@ -6,6 +6,10 @@
 {% endblock %}
 
 {% block content %}
+<div id="sign">
+    <span onclick="location.href='{% url 'second:signin_ok' %}';">{{ request.user.username }} 님 </span>
+    <span onclick="location.href='{% url 'second:signout' %}';">로그아웃</span>
+</div>
 <div id="pagetitle">{{ "할 일 등록" }}
     <div id="icon" onclick="location.href='{% url 'second:todo_add' %}';">
         <img src="{% static 'second/images/icon_modify.png'%}"/></div>

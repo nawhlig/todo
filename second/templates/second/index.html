@@ -6,7 +6,11 @@
 {% endblock %}
 
 {% block content %}
-<div id="pagetitle">{{ "로그인" }}
+<div id="sign">
+    <span onclick="location.href='{% url 'second:signin' %}';">로그인</span>
+    <span onclick="location.href='{% url 'second:signup' %}';">회원가입</span>
+</div>
+<div id="pagetitle">{{ "Todo & Facourite" }}
 <!--
     <div id="icon" onclick="location.href='{% url 'second:todo_add' %}';">
         <img src="{% static 'second/images/icon_modify.png'%}"/></div>
@@ -15,8 +19,7 @@
 -->
 </div>
     <div id="box">
-    <h1> 어서오세요. 회원 인증 되었습니다.<h1>
-    {{ request.user.is_authenticated }}
-    {{ request.user.username }}
+    <h1> 어서오세요. 로그인을 해주세요</h1>
+    <h3> 인증상태 : {{ request.user.is_authenticated }}</h3>
     </div>
 {% endblock %}

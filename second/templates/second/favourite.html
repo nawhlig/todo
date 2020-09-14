@@ -6,6 +6,10 @@
 {% endblock %}
 
 {% block content %}
+<div id="sign">
+    <span onclick="location.href='{% url 'second:signin_ok' %}';">{{ request.user.username }} 님 </span>
+    <span onclick="location.href='{% url 'second:signout' %}';">로그아웃</span>
+</div>
 <div id="pagetitle">{{ text }}
     <div id="icon" onclick="location.href='{% url 'second:favourite_add' %}';">
     <img src="{% static 'second/images/icon_add.png'%}"/>
@@ -16,7 +20,12 @@
             <div id="db_list" onclick="location.href='{% url 'second:favourite_detail' views_favourite_contents.seq %}';">
                 <div id="name">{{ views_favourite_contents.name }}</div>
                 <div id="reg_date">{{ views_favourite_contents.reg_date | date:"Y-m-d" }}</div>
-                <div><img src="{% static 'second/images/icon_more.png'%}"/></div>
+                <div class="dropdown"><img src="{% static 'second/images/icon_more.png'%}"/>
+                    <div class="dropdown-content">
+                        <a href="{% url 'second:favourite_delete' views_favourite_contents.seq %}">삭제</a>
+                        <a href="{% url 'second:favourite_modify' views_favourite_contents.seq %}">수정</a>
+                    </div>
+                </div>
             </div>
         {% endfor %}
     </div>

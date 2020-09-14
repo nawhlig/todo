@@ -60,9 +60,19 @@ table {border-collapse: collapse; border-spacing: 0;}
                     margin-right: 10px;
                 }
 
+#sign{ margin-top: 20px;
+                  margin-left: 100px;
+                  margin-right: 90px;
+                  padding-top: 20px;
+                  padding-bottom: 20px;
+                  box-sizing: border-box;
+                  /* border-bottom: 0.1px solid rgb(252, 2, 2); */
+                  text-align : right;
+                  }
+#sign span{ cursor: pointer;
+            font-size:15px;}          
 
-
-#pagetitle{ margin-top: 100px;
+#pagetitle{ margin-top: 0px;
             margin-left: 100px;
             margin-right: 90px;
             padding-bottom: 20px;
@@ -81,19 +91,51 @@ table {border-collapse: collapse; border-spacing: 0;}
            height: 20px;
         }
 
+.dropdown{ box-sizing: border-box;
+    width: 40px; 
+    height: 40px;
+    padding: 10px;
+    float: right;
+    cursor: pointer;}
+     
+.dropdown img{ width: auto;
+               height: 20px;
+            }
+
+.dropdown-content { display: none;
+                    background-color: #e7e7e7;
+                    min-width: 70px;
+                    }
+
+.dropdown-content a { color: black;
+                      padding: 12px 16px;
+                      display: block;
+                      font-size: 12px;
+                    }
+
+.dropdown-content a:hover { color: white;
+                            background-color: #810355;}
+
+.dropdown:hover .dropdown-content { display: block;
+                                    position: absolute; }
+
+
 #box{ margin: 0 auto;
-      padding-right: 100px;
-      padding-left: 100px;
+      margin-left: 104px;
       padding-top: 50px;
       width: 750px;
+      height: auto;
+      box-sizing: border-box
       /*background-color: gray;*/
       }
 
-#db_list, #db_list_detail{margin-bottom: 20px;
-                          padding: 20px;
-                          padding-top: 18px;
-                          padding-bottom: 18px;
+#db_list, #db_list_detail{width: 750px;
+                          margin-bottom: 20px;
+                          padding: 0px;
+                          padding-top: 10px;
+                          padding-bottom: 10px;
                           border: 0.1px solid rgb(194, 194, 194);
+                          float: left;
                           }
 
 #db_list{ cursor: pointer;}
@@ -101,12 +143,16 @@ table {border-collapse: collapse; border-spacing: 0;}
 #db_list #name{ float: left;
                 width:450px;
                 margin-left: 20px;
+                padding-top: 10px;
+                padding-bottom: 10px;
                 font-weight: bold;
                 }
 
 #db_list #reg_date{ float: left;
                     width:100px;
                     margin-left: 100px;
+                    padding-top: 10px;
+                    padding-bottom: 10px;
                     font-weight: bold;
                     }
 
@@ -127,8 +173,10 @@ input { margin-top: 30px; }
                           }
 
 .todo_contents #name{ float: left;
-                      width:130px;
+                      width:113px;
                       margin-left: 8px;
+                      padding-top: 10px;
+                      padding-bottom: 10px;
                       font-weight: bold;
                       font-size : 13px;
                       text-align: left;
@@ -149,17 +197,19 @@ input { margin-top: 30px; }
 .todo_contents{ box-sizing: border-box;
                 float: left;
                 width: 240px;
-                height: 50px;
+                height: 40px;
                 margin: 10px;
-                padding-top: 16px;
+                padding-top: 0px;
                 border: 0.1px solid rgb(194, 194, 194);
                 cursor: pointer;
                 }
 
-.todo_contents #end_date{ float: left;
+.todo_contents #end_date{float: left;
                          width:77px;
+                         padding-top: 10px;
+                         padding-bottom: 10px;
                          font-size : 13px;
-                         text-align: left;
+                         text-align: right;
                          }
 .todo_contents #group{ float: right;
                  width:39px;
